@@ -18,7 +18,7 @@ form.addEventListener('submit', addItem)
 // clear items
 clearBtn.addEventListener("click", clearItems);
 // load items
-window.addEventListener('DOMContentLoaded',setupItems);
+window.addEventListener('DOMContentLoaded', setupItems);
 
 // ****** FUNCTIONS **********
 
@@ -27,7 +27,7 @@ function addItem(e) {
   const value = grocery.value;
   const id = new Date().getTime().toString();
   if (value !== "" && editFlag === false) {
-   creatListItem(id,value);
+    creatListItem(id, value);
     displayAlert('item added', 'success');
     container.classList.add("show-container");
     // add to local storage
@@ -106,47 +106,47 @@ function addToLocalStorage(id, value) {
   const grocery = { id, value };
   let items = getLocalStorage();
   items.push(grocery);
-  localStorage.setItem('list',JSON.stringify(items));
+  localStorage.setItem('list', JSON.stringify(items));
 
 }
 
 function getLocalStorage() {
   return localStorage.getItem('list') ? JSON.parse(localStorage.getItem('list')) : [];
 }
-function editLocalStorage(id,value) {
+function editLocalStorage(id, value) {
   let items = getLocalStorage();
-  items = items.map(function(item){
+  items = items.map(function (item) {
     if (item.id === id) {
       item.value = value;
     }
     return item;
   })
-  localStorage.setItem('list',JSON.stringify(items));
+  localStorage.setItem('list', JSON.stringify(items));
 }
 
-function removeFromLocalStorage(id){
+function removeFromLocalStorage(id) {
   let items = getLocalStorage();
-  items = items.filter(function(item){
+  items = items.filter(function (item) {
     if (item.id !== id) {
-    return item
-  }
+      return item
+    }
   })
-  localStorage.setItem('list',JSON.stringify(items));
+  localStorage.setItem('list', JSON.stringify(items));
 }
 
 // ****** SETUP ITEMS **********
 
-function setupItems () {
+function setupItems() {
   let items = getLocalStorage();
   if (items.length > 0) {
-    items.forEach(function(item) {
+    items.forEach(function (item) {
       creatListItem(item.id, item.value);
     })
     container.classList.add("show-container")
   }
 }
 
-function creatListItem (id, value) {
+function creatListItem(id, value) {
   const element = document.createElement('article');
   element.classList.add('grocery-item');
   const attr = document.createAttribute('data-id');
